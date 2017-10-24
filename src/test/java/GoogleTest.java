@@ -7,6 +7,7 @@ public class GoogleTest {
 
     @Test
     public void googleTest(){
+        //comment below while bit9 locks driver executables
         //ChromeDriverManager.getInstance().setup();
 
         ChromeDriver driver = new ChromeDriver();
