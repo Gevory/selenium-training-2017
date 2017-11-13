@@ -7,24 +7,18 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class MainStorePage extends PageBase {
+    public HeaderBlock headerBlock;
 
     public MainStorePage(WebDriver driver) {
         super(driver);
+        headerBlock = new HeaderBlock(super.driver);
     }
 
     public void open(){
         driver.get("http://localhost/litecart");
     }
 
-    public WebElement cartQuantity(){
-    return driver.findElement(By.cssSelector("span.quantity"));
-    }
-
     public List<WebElement> products() {
         return driver.findElements(By.cssSelector(".price"));
-    }
-
-    public String getCartQuantity(){
-        return cartQuantity().getAttribute("textContent");
     }
 }

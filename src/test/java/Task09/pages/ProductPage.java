@@ -8,20 +8,16 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 public class ProductPage extends PageBase {
+    public HeaderBlock headerBlock;
+
     public ProductPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+        headerBlock = new HeaderBlock(super.driver);
     }
 
     @FindBy(css = "button[value='Add To Cart']")
     public WebElement addToCartButton;
-
-    @FindBy(css = "span.quantity")
-    public WebElement cartQuantity;
-
-    public String getCartQuantity(){
-        return cartQuantity.getAttribute("textContent");
-    }
 
     public ProductPage selectSize(){
         if (driver.findElements(By.cssSelector("select")).size() > 0){

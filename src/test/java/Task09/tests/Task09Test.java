@@ -9,7 +9,9 @@ public class Task09Test extends TestBase {
         app.mainStorePage.open();
 
         // Add products to the cart
-        app.addToCart(4);
+        for (int i=0; i<4; i++) {
+            app.addToCart();
+        }
 
         // Navigate to Checkout
         app.checkoutPage.open();
@@ -19,7 +21,7 @@ public class Task09Test extends TestBase {
 
         // Verify that all items were deleted from cart so 0 items are shown in cart on the main page
         app.mainStorePage.open();
-        String numberOfItems = app.mainStorePage.getCartQuantity();
+        String numberOfItems = app.mainStorePage.headerBlock.getCartQuantity();
         Assert.assertEquals("0", numberOfItems);
     }
 }

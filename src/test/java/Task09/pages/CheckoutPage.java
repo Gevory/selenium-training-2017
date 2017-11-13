@@ -22,9 +22,6 @@ public class CheckoutPage extends PageBase{
     @FindBy(css = "td.item")
     public List<WebElement> cartItems;
 
-//    @FindBy(css = ".dataTable")
-//    public WebElement productsTable;
-
     public WebElement productsTable() {
         return driver.findElement(By.cssSelector(".dataTable"));
     }

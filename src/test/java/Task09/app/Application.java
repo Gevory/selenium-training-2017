@@ -30,15 +30,13 @@ public class Application {
         driver.quit();
     }
 
-    public void addToCart(int numberOfProducts){
-        for (int i=0; i<numberOfProducts; i++) {
-            mainStorePage.products().get(i).click();
-            int cartQuantity = Integer.parseInt(productPage.getCartQuantity());
-            productPage.selectSize().addToCartButton.click();
-            int newCartQuantity = cartQuantity + 1;
-            wait.until(ExpectedConditions.attributeToBe(productPage.cartQuantity, "textContent", Integer.toString(newCartQuantity)));
-            mainStorePage.open();
-        }
+    public void addToCart(){
+        mainStorePage.products().get(0).click();
+        int cartQuantity = Integer.parseInt(productPage.headerBlock.getCartQuantity());
+        productPage.selectSize().addToCartButton.click();
+        int newCartQuantity = cartQuantity + 1;
+        wait.until(ExpectedConditions.attributeToBe(productPage.headerBlock.cartQuantity, "textContent", Integer.toString(newCartQuantity)));
+        mainStorePage.open();
     }
 
     public void deleteAllFromCart(){
