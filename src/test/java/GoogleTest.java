@@ -20,7 +20,6 @@ public class GoogleTest {
 
     @Parameterized.Parameters
     public static WebDriver[] getDriver() {
-
         ChromeDriverManager.getInstance().setup();
         InternetExplorerDriverManager.getInstance().setup();
         FirefoxDriverManager.getInstance().setup();
@@ -32,7 +31,6 @@ public class GoogleTest {
     public void googleTest(){
             driver.get("http://www.google.com");
             driver.findElement(By.xpath("//*[@id='lst-ib']")).sendKeys("WebDriver" + Keys.ENTER);
-
     }
 
     @After
