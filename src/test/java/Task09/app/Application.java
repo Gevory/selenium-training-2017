@@ -30,21 +30,7 @@ public class Application {
         driver.quit();
     }
 
-//    public void navigateToHome(){
-//        mainStorePage.open();
-//    }
-//
-//    public void navigateToCheckout(){
-//        checkoutPage.open();
-//    }
-
-//    public String getCartQuantity(){
-//        return mainStorePage.getCartQuantity();
-//    }
-
     public void addToCart(int numberOfProducts){
-//        WebElement product = mainStorePage.products().get(itemNumber);
-//        product.click();
         for (int i=0; i<numberOfProducts; i++) {
             mainStorePage.products().get(i).click();
             int cartQuantity = Integer.parseInt(productPage.getCartQuantity());
@@ -56,13 +42,11 @@ public class Application {
     }
 
     public void deleteAllFromCart(){
-        //List<WebElement> cartItems = checkoutPage.cartItems;
         for (int j=checkoutPage.cartItems.size(); j>0; j--){
             WebElement productsTable = checkoutPage.productsTable();
             checkoutPage.removeButton.click();
             wait.until(ExpectedConditions.stalenessOf(productsTable));
         }
         wait.until(ExpectedConditions.attributeToBe(checkoutPage.noItemsMessage, "textContent" , "There are no items in your cart." ));
-        //wait.until(ExpectedConditions.textToBe(By.cssSelector("em"), "There are no items in your cart." ));
     }
 }
