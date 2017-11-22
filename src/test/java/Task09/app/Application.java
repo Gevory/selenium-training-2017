@@ -1,6 +1,7 @@
 package Task09.app;
 
 import Task09.pages.CheckoutPage;
+import Task09.pages.HeaderBlock;
 import Task09.pages.MainStorePage;
 import Task09.pages.ProductPage;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
@@ -13,9 +14,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Application {
     private WebDriver driver;
     private WebDriverWait wait;
-    public MainStorePage mainStorePage;
-    public ProductPage productPage;
-    public CheckoutPage checkoutPage;
+    private MainStorePage mainStorePage;
+    private ProductPage productPage;
+    private CheckoutPage checkoutPage;
+    private HeaderBlock headerBlock;
 
     public Application() {
         ChromeDriverManager.getInstance().setup();
@@ -24,6 +26,7 @@ public class Application {
         mainStorePage = new MainStorePage(driver);
         productPage = new ProductPage(driver);
         checkoutPage = new CheckoutPage(driver);
+        headerBlock = new HeaderBlock(driver);
     }
 
     public void quit(){
@@ -31,20 +34,26 @@ public class Application {
     }
 
     public void addToCart(){
+        mainStorePage.open();
         mainStorePage.products().get(0).click();
-        int cartQuantity = Integer.parseInt(productPage.headerBlock.getCartQuantity());
+        int cartQuantity = Integer.parseInt(getNumberOfProductsInCart());
         productPage.selectSize().addToCartButton.click();
         int newCartQuantity = cartQuantity + 1;
-        wait.until(ExpectedConditions.attributeToBe(productPage.headerBlock.cartQuantity, "textContent", Integer.toString(newCartQuantity)));
-        mainStorePage.open();
+        wait.until(ExpectedConditions.attributeToBe(headerBlock.cartQuantity, "textContent", Integer.toString(newCartQuantity)));
     }
 
     public void deleteAllFromCart(){
+        checkoutPage.open();
         for (int j=checkoutPage.cartItems.size(); j>0; j--){
             WebElement productsTable = checkoutPage.productsTable();
             checkoutPage.removeButton.click();
             wait.until(ExpectedConditions.stalenessOf(productsTable));
         }
         wait.until(ExpectedConditions.attributeToBe(checkoutPage.noItemsMessage, "textContent" , "There are no items in your cart." ));
+        mainStorePage.open();
+    }
+
+    public String getNumberOfProductsInCart(){
+        return headerBlock.getCartQuantity();
     }
 }

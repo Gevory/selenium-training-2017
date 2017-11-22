@@ -8,12 +8,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 public class ProductPage extends PageBase {
-    public HeaderBlock headerBlock;
-
     public ProductPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-        headerBlock = new HeaderBlock(super.driver);
     }
 
     @FindBy(css = "button[value='Add To Cart']")

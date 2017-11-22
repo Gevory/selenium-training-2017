@@ -7,11 +7,8 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class MainStorePage extends PageBase {
-    public HeaderBlock headerBlock;
-
     public MainStorePage(WebDriver driver) {
         super(driver);
-        headerBlock = new HeaderBlock(super.driver);
     }
 
     public void open(){
